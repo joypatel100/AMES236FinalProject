@@ -39,7 +39,7 @@ public class MainMenuScreen extends AScreen{
 		chooser.setTitle("File to Load");
 		chooser.getExtensionFilters().add(new ExtensionFilter("Text Files", "*.txt"));
 		File file = chooser.showOpenDialog(this.myStoryGame.getStage());
-		this.myStoryGame.setScreen(new MapScreen(this.myStoryGame, new StoryLines(file.getPath())));
+		this.myStoryGame.setScreen(new MapScreen(this.myStoryGame, new StoryLines(file.getPath(),this.myStoryGame.getStage())));
 	}
 
 	@Override

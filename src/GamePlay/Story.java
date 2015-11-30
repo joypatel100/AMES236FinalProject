@@ -28,5 +28,13 @@ public class Story {
 	public List<ImageView> getPages(){
 		return this.myPages;
 	}
+	
+	public boolean atEnd(){
+		return this.myIndex == this.myPages.size()-1;
+	}
+	
+	public boolean isBeginning(){
+		return this.myIndex == 0;
+	}
 
 }

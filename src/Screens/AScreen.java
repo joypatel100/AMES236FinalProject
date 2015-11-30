@@ -7,7 +7,7 @@ public abstract class AScreen {
 	
 	public AScreen(StoryGame game){
 		this.myStoryGame = game;
-		this.myStoryGame.clearMyRoot();
+		this.myStoryGame.clearRoot();
 	}
 	
 	public abstract void update(double elapsedTime);

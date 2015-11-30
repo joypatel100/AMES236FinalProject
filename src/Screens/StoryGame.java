@@ -64,11 +64,17 @@ public class StoryGame {
 		this.myRoot.getChildren().add(node);
 	}
 	
-	public void removeFromRoot(Node node){
-		this.myRoot.getChildren().remove(node);
+	public int removeFromRoot(Node node){
+		for(int i = 0; i < this.myRoot.getChildren().size(); i++){
+			if(this.myRoot.getChildren().get(i).equals(node)){
+				this.myRoot.getChildren().remove(node);
+				return i;
+			}
+		}
+		return -1;
 	}
 	
-	public void clearMyRoot(){
+	public void clearRoot(){
 		this.myRoot.getChildren().clear();
 	}
 	

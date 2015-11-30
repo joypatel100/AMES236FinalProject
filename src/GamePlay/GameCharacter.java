@@ -12,7 +12,7 @@ public class GameCharacter {
 	private Integer myIndexFront, myIndexBack, myIndexRight, myIndexLeft;
 	private ImageView myCurrent;
 
-	private enum State{
+	public static enum State{
 		LEFT,RIGHT,BACK,FRONT,STOP;
 	}
 	
@@ -52,8 +52,20 @@ public class GameCharacter {
 		this.myCurrent.setY(myY);
 	}
 
+	private int indexUpdate(List<ImageView> list, int i){
+		i++;
+		if(i >= list.size()){
+			i = 0;
+		}
+		return i;
+	}
+	
 	public void init(){
 		this.myCurrent = this.getFrontStation();
+	}
+	
+	public void initRight(){
+		this.myCurrent = this.getRightStation();
 	}
 	
 	public ImageView getCurrentImage(){
@@ -62,10 +74,6 @@ public class GameCharacter {
 	
 	private ImageView move(List<ImageView> list, Integer index){
 		ImageView result = list.get(index);
-		index++;
-		if(index >= list.size()){
-			index = 0;
-		}
 		return result;
 	}
 
@@ -109,21 +117,25 @@ public class GameCharacter {
 
 	private ImageView moveRight(){
 		this.myX += mySpeed;
+		this.myIndexRight = indexUpdate(this.myRight,this.myIndexRight);
 		return move(this.myRight,this.myIndexRight);
 	}
 
 	private ImageView moveLeft(){
 		this.myX -= mySpeed;
+		this.myIndexLeft = indexUpdate(this.myLeft,this.myIndexLeft);
 		return move(this.myLeft,this.myIndexLeft);
 	}
 
 	private ImageView moveFront(){
 		this.myY += mySpeed;
+		this.myIndexFront = indexUpdate(this.myFront,this.myIndexFront);
 		return move(this.myFront,this.myIndexFront);
 	}
 
 	private ImageView moveBack(){
 		this.myY -= mySpeed;
+		myIndexBack = indexUpdate(this.myBack,this.myIndexBack);
 		return move(this.myBack,this.myIndexBack);
 	}
 
@@ -150,21 +162,27 @@ public class GameCharacter {
 	public double getY(){
 		return this.myY;
 	}
+	
+	private ImageView updateToCurrent(ImageView iv){
+		iv.setX(myX);
+		iv.setY(myY);
+		return iv;
+	}
 
 	public ImageView getFrontStation(){
-		return this.myFront.get(0);
+		return updateToCurrent(this.myFront.get(0));
 	}
 
 	public ImageView getBackStation(){
-		return this.myBack.get(0);
+		return updateToCurrent(this.myBack.get(0));
 	}
 
 	public ImageView getLeftStation(){
-		return this.myLeft.get(0);
+		return updateToCurrent(this.myLeft.get(0));
 	}
 
 	public ImageView getRightStation(){
-		return this.myRight.get(0);
+		return updateToCurrent(this.myRight.get(0));
 	}
 	
 	public void removeCharacter(Group root){
@@ -172,6 +190,27 @@ public class GameCharacter {
 		root.getChildren().removeAll(myFront);
 		root.getChildren().removeAll(myLeft);
 		root.getChildren().removeAll(myRight);
+	}
+	
+	public void removeCharacterLR(Group root){
+		root.getChildren().removeAll(myLeft);
+		root.getChildren().removeAll(myRight);
+	}
+	
+	public State getState(){
+		return this.myState;
+	}
+	
+	public void setX(double x){
+		this.myX = x;
+	}
+	
+	public void setY(double y){
+		this.myY = y;
+	}
+	
+	public void initLeft(){
+		this.myCurrent = getLeftStation();
 	}
 }
 

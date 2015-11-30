@@ -39,12 +39,19 @@ public class CreateStoryScreen extends AScreen{
 		this.myStoryGame.addToRoot(myHBox);
 		initNumLevelsComboBox();
 		initDone();
+		initBackToMenu();
 	}
 	
 	private void initDone(){
 		this.myDone = UIUtil.initButton("Done", StoryGame.WIDTH*.5, StoryGame.HEIGHT*.5);
 		this.myDone.setOnAction(e -> handleDone());
 		this.myStoryGame.addToRoot(myDone);
+	}
+	
+	private void initBackToMenu(){
+		Button back = UIUtil.initButton("Main Menu", StoryGame.WIDTH*.5, StoryGame.HEIGHT*.6);
+		back.setOnAction(e -> {this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));});
+		this.myStoryGame.addToRoot(back);
 	}
 	
 	private void handleDone(){
