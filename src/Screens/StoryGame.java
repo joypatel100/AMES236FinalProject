@@ -80,5 +80,9 @@ public class StoryGame {
 		return this.myStage;
 	}
 	
+	public Group getRoot(){
+		return this.myRoot;
+	}
+	
 
 }

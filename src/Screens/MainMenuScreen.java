@@ -1,8 +1,13 @@
 package Screens;
 
+import java.io.File;
+
+import GamePlay.StoryLines;
 import Utility.UIUtil;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MainMenuScreen extends AScreen{
 
@@ -30,7 +35,11 @@ public class MainMenuScreen extends AScreen{
 	}
 	
 	private void loadHandler(){
-		
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("File to Load");
+		chooser.getExtensionFilters().add(new ExtensionFilter("Text Files", "*.txt"));
+		File file = chooser.showOpenDialog(this.myStoryGame.getStage());
+		this.myStoryGame.setScreen(new MapScreen(this.myStoryGame, new StoryLines(file.getPath())));
 	}
 
 	@Override
