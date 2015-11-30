@@ -1,5 +1,7 @@
 package Screens;
-import javafx.collections.ObservableList;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -14,8 +16,22 @@ public class StoryGame {
 	private Stage myStage;
 	private AScreen myScreen;
 	
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH;
+	public static final int HEIGHT;
+	static{
+		int width, height;
+		try{
+			Dimension sz = Toolkit.getDefaultToolkit().getScreenSize();
+			width = (int) sz.getWidth();
+			height = (int) sz.getHeight();
+		}
+		catch(Exception e){
+			width = 800;
+			height = 800;
+		}
+		WIDTH = width;
+		HEIGHT = height;
+	}
 	
 	public Scene init(Stage stage){
 		this.myStage = stage;
@@ -58,6 +74,10 @@ public class StoryGame {
 	
 	public void setScreen(AScreen screen){
 		this.myScreen = screen;
+	}
+	
+	public Stage getStage(){
+		return this.myStage;
 	}
 	
 
