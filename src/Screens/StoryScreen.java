@@ -6,6 +6,7 @@ import java.util.List;
 import GamePlay.GameCharacter;
 import GamePlay.GameCharacter.State;
 import GamePlay.Story;
+import GamePlay.StoryLines;
 import Utility.UIUtil;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -15,11 +16,13 @@ public class StoryScreen extends AScreen{
 	private Story myStory;
 	private ImageView myCurrent;
 	private GameCharacter myCharacter;
+	private StoryLines myStoryLines;
 
-	public StoryScreen(StoryGame game, Story story) {
+	public StoryScreen(StoryGame game, Story story, StoryLines storylines) {
 		super(game);
 		// TODO Auto-generated constructor stub
 		this.myStory = story;
+		this.myStoryLines = storylines;
 		this.myCurrent = story.getPages().get(0);
 		this.myStoryGame.addToRoot(myCurrent);
 		List<ImageView> left = UIUtil.initIV(MapScreen.LEFT);
@@ -44,7 +47,13 @@ public class StoryScreen extends AScreen{
 		if(this.myCharacter.getX() > .9*((double) StoryGame.WIDTH) && this.myCharacter.getState()==State.RIGHT){
 			this.myCurrent = this.myStory.next();
 			if(this.myStory.atEnd()){
-				this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));
+				this.myStoryLines.next();
+				if(this.myStoryLines.isOver()){
+					this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));
+				}
+				else{
+					this.myStoryGame.setScreen(new MapScreen(this.myStoryGame,myStoryLines));
+				}
 				this.myCurrent = null;
 			}
 			else{

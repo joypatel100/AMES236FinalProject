@@ -58,11 +58,11 @@ public class StoryLines {
 	}
 
 	public void next(){
-		this.myCurrentLevel = Math.min(myCurrentLevel+1, Collections.max(myMap.keySet())); 
+		this.myCurrentLevel += 1; 
 	}
 
 	public boolean isOver(){
-		return this.myCurrentLevel == Collections.max(myMap.keySet());
+		return this.myCurrentLevel == Collections.max(myMap.keySet())+1;
 	}
 
 }
