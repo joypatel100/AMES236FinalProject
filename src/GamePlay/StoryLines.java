@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 import Utility.UIUtil;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -18,7 +19,9 @@ public class StoryLines {
 	private Map<Integer,Doors> myMap;
 	private int myCurrentLevel;
 	private List<ImageView> myShards;
+	private List<ImageView> myCollected;
 	private int myShardIndex;
+	private Map<Image,ImageView> myMirrors;
 	
 	public StoryLines(Stage stage){
 		initBasic();
@@ -134,6 +137,10 @@ public class StoryLines {
 		}
 	}
 	
+	public Map<Image,ImageView> getMirrors(){
+		return this.myMirrors;
+	}
+	
 	private void initBasic(){
 		myShards = new ArrayList<>();
 		myShards.add(UIUtil.initImageView("s_piece1_orange.png", 0, 0));
@@ -143,11 +150,25 @@ public class StoryLines {
 		myShards.add(UIUtil.initImageView("s_piece2_teal.png", 0, 0));
 		myShards.add(UIUtil.initImageView("s_piece3_pink.png", 0, 0));
 		myShards.add(UIUtil.initImageView("s_piece3_purple.png", 0, 0));
+		myMirrors = new HashMap<>();
+		myMirrors.put(myShards.get(0).getImage(), UIUtil.initImageView("piece1_orange.png", 0, 0));
+		myMirrors.put(myShards.get(1).getImage(), UIUtil.initImageView("piece1_red.png", 0, 0));
+		myMirrors.put(myShards.get(2).getImage(), UIUtil.initImageView("piece2_blue.png", 0, 0));
+		myMirrors.put(myShards.get(3).getImage(), UIUtil.initImageView("piece2_green.png", 0, 0));
+		myMirrors.put(myShards.get(4).getImage(), UIUtil.initImageView("piece2_teal.png", 0, 0));
+		myMirrors.put(myShards.get(5).getImage(), UIUtil.initImageView("piece3_pink.png", 0, 0));
+		myMirrors.put(myShards.get(6).getImage(), UIUtil.initImageView("piece3_purple.png", 0, 0));
+		
 		this.myCurrentLevel = 1;
 		this.myMap = new HashMap<>();
 		this.myShardIndex = 0;
+		this.myCollected = new ArrayList<>();
 	}
 
+	public List<ImageView> getCollected(){
+		return this.myCollected;
+	}
+	
 	private String combine(String pre, int mid, String suf){
 		return pre+mid+suf;
 	}

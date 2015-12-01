@@ -19,14 +19,15 @@ public class MirrorAnimationScreen extends AScreen {
 	protected ImageView myMirror;
 	protected boolean finished;
 	protected ImageView emptyMirror, mirrorP1_o, mirrorP2_b, mirrorP3_p;
-	private StoryLines myStoryLine;
+	protected StoryLines myStoryLine;
+	protected ImageView myBackground;
 	
 	public MirrorAnimationScreen(StoryGame game, StoryLines sl) {
 		super(game);
-		ImageView background = UIUtil.initImageView(UIUtil.getImage("galaxy.png"), 0, 0);
-		background.fitWidthProperty().bind(this.myStoryGame.getStage().widthProperty());
-		background.fitHeightProperty().bind(this.myStoryGame.getStage().heightProperty());
-		this.myStoryGame.addToRoot(background);
+		myBackground = UIUtil.initImageView(UIUtil.getImage("galaxy.png"), 0, 0);
+		myBackground.fitWidthProperty().bind(this.myStoryGame.getStage().widthProperty());
+		myBackground.fitHeightProperty().bind(this.myStoryGame.getStage().heightProperty());
+		this.myStoryGame.addToRoot(myBackground);
 		Image image = UIUtil.getImage("mirror_orig.png");
 		centerX = StoryGame.WIDTH/2-image.getWidth()/2;
 		centerY = StoryGame.HEIGHT/2-image.getHeight()/2;
@@ -51,7 +52,7 @@ public class MirrorAnimationScreen extends AScreen {
 	protected void startAnimation(){
 		Text complete = new Text("Press Enter");
 		complete.setTranslateX(StoryGame.WIDTH/2);
-		complete.setTranslateY(StoryGame.HEIGHT/10);
+		complete.setTranslateY(StoryGame.HEIGHT/2);
 		this.myStoryGame.addToRoot(complete);
 		
 		this.myStoryGame.addToRoot(emptyMirror);
@@ -71,6 +72,7 @@ public class MirrorAnimationScreen extends AScreen {
 		
 		this.myStoryGame.removeFromRoot(emptyMirror);
 		this.myStoryGame.removeFromRoot(myMirror);
+		
 	}
 
 	protected Path genPath(MoveTo mt, LineTo lt){

@@ -81,6 +81,7 @@ public class MapScreen extends AScreen{
 		for(ImageView iv: map.keySet()){
 			if(iv.getBoundsInParent().intersects(myCharacter.getCurrentImage().getBoundsInParent())){
 				//this.myCharacter = null;
+				this.myStoryLines.getCollected().add(iv);
 				this.myStoryGame.setScreen(new StoryScreen(this.myStoryGame,map.get(iv),myStoryLines));
 				break;
 			}

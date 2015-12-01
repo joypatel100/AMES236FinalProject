@@ -1,5 +1,10 @@
 package Screens;
 
+import java.util.Map;
+
+import GamePlay.StoryLines;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -9,15 +14,22 @@ import javafx.scene.text.Text;
 public class MirrorReconstructionScreen extends MirrorAnimationScreen{
 
 	private int countComplete;
-	
-	public MirrorReconstructionScreen(StoryGame game) {
-		super(game, null);
+
+	public MirrorReconstructionScreen(StoryGame game, StoryLines storylines) {
+		super(game, storylines);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override 
 	protected void init(){
-		countComplete = 0;
+		countComplete = 0; 
+		
+		if(this.myStoryLine.getCollected().size() >= 3){
+			Map<Image,ImageView> mirrors = this.myStoryLine.getMirrors();
+			this.mirrorP1_o = mirrors.get(this.myStoryLine.getCollected().get(0).getImage());
+			this.mirrorP2_b = mirrors.get(this.myStoryLine.getCollected().get(1).getImage());
+			this.mirrorP3_p = mirrors.get(this.myStoryLine.getCollected().get(2).getImage());
+		}
 		//this.myStoryGame.addToRoot(emptyMirror);	
 	}
 
@@ -32,6 +44,9 @@ public class MirrorReconstructionScreen extends MirrorAnimationScreen{
 		this.mirrorP2_b.setX(StoryGame.WIDTH/2);
 		this.mirrorP2_b.setY(StoryGame.HEIGHT);
 
+		this.myStoryGame.clearRoot();
+		this.myStoryGame.addToRoot(myBackground);
+		
 		this.myStoryGame.addToRoot(mirrorP1_o);
 		this.myStoryGame.addToRoot(mirrorP2_b);
 		this.myStoryGame.addToRoot(mirrorP3_p);
@@ -62,7 +77,7 @@ public class MirrorReconstructionScreen extends MirrorAnimationScreen{
 	protected void completeAnimation(){
 		countComplete++;
 		if(countComplete == 3){
-			this.myStoryGame.addToRoot(myMirror);
+			//this.myStoryGame.addToRoot(myMirror);
 		}
 	}
 
