@@ -10,9 +10,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 public class LoadingScreen extends AScreen{
-	
+
 	private File myFile;
 	private boolean hasLoaded;
+
+	public LoadingScreen(StoryGame game){
+		this(game,null);
+	}
 
 	public LoadingScreen(StoryGame game, File file) {
 		super(game);
@@ -36,7 +40,12 @@ public class LoadingScreen extends AScreen{
 			hasLoaded = true;
 			StoryLines sl = null;
 			try{
-				sl = new StoryLines(myFile.getPath(),this.myStoryGame.getStage());
+				if(myFile==null){
+					sl = new StoryLines(this.myStoryGame.getStage());
+				}
+				else{
+					sl = new StoryLines(myFile,this.myStoryGame.getStage());
+				}
 			}
 			catch(Exception e){
 				this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));
@@ -57,7 +66,7 @@ public class LoadingScreen extends AScreen{
 		default:
 			break;
 		}
-		*/
+		 */
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package Screens;
 
 import java.io.File;
 
-import GamePlay.StoryLines;
 import Utility.UIUtil;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -21,6 +20,18 @@ public class MainMenuScreen extends AScreen{
 		this.myStoryGame.addToRoot(background);
 		initCreateButton();
 		initLoadButton();
+		initDefault();
+	}
+
+	private void initDefault(){
+		Button def = UIUtil.initButton("Identity Story", .4*StoryGame.WIDTH, .2*StoryGame.HEIGHT);
+		def.setOnAction(e -> defHandler());
+		this.myStoryGame.addToRoot(def);
+	}
+	
+	private void defHandler() {
+		// TODO Auto-generated method stub
+		this.myStoryGame.setScreen(new LoadingScreen(this.myStoryGame));
 	}
 
 	private void initCreateButton(){

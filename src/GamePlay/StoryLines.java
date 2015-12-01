@@ -1,15 +1,12 @@
 package GamePlay;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 import Utility.UIUtil;
@@ -20,10 +17,116 @@ public class StoryLines {
 
 	private Map<Integer,Doors> myMap;
 	private int myCurrentLevel;
-	private static List<ImageView> myShards;
+	private List<ImageView> myShards;
 	private int myShardIndex;
+
+	public StoryLines(Stage stage){
+		initBasic();
+		String pre = "Comic/Tier1/Christine-comic-first-tier/Panel ";
+		String suf = ".jpg";
+		this.myMap.put(1, new Doors());
+		Story story = new Story();
+		for(int i = 1; i <= 10; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(1).addStory(story);
+		pre = "Comic/Tier1/Jennifer-comic-first-tier/Panel ";
+		story = new Story();
+		for(int i = 1; i <= 19; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(1).addStory(story);
+
+		this.myMap.put(2, new Doors());
+		pre = "Comic/Tier2/Amy-comic-second-tier/Amy-pg";
+		suf = ".png";
+		story = new Story();
+		for(int i = 1; i <= 8; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(2).addStory(story);
+		pre = "Comic/Tier2/Jennifer-comic-second-tier/Jennifer-panel";
+		suf = ".png";
+		story = new Story();
+		for(int i = 1; i <=9 ; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre+"0",i,suf),0,0,stage));
+		}
+		for(int i = 10; i <=17; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(2).addStory(story);
+		pre = "Comic/Tier2/Yuxuan-comic-pages/BookScanCenter_";
+		suf = ".png";
+		story = new Story();
+		for(int i = 1; i <= 3; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(2).addStory(story);
+
+		this.myMap.put(3, new Doors());
+		pre = "Comic/Tier3/Amy-_GLB, YK_-Comic-Pages/BookScanCenter_";
+		suf = ".png";
+		story = new Story();
+		for(int i = 1; i <= 3; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(3).addStory(story);
+		pre = "Comic/Tier3/Sam-comic-pages/Sam-pg";
+		suf = ".png";
+		story = new Story();
+		for(int i = 1; i <= 9; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre+"0",i,suf),0,0,stage));
+		}
+		for(int i = 10; i <= 11; i++){
+			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+		}
+		this.myMap.get(3).addStory(story);
+
+
+	}
+
+	public StoryLines(File path, Stage stage){
+		initBasic();
+		int mapI = 1;
+		try(Scanner scanner = new Scanner(this.getClass().getClassLoader().getResourceAsStream(path.getName()))){
+			while(scanner.hasNextLine()){
+				String line = scanner.nextLine();
+				line = line.trim();
+				if(line.matches("\\d+")){
+					mapI = Integer.parseInt(line);
+					myMap.put(mapI, new Doors());
+					//System.out.println(mapI);
+				}
+				else if(!line.endsWith("DS_Store") && !line.equals("")){
+					File dir = new File(line);
+					Story story = new Story();
+					Map<Integer,ImageView> map = new TreeMap<>();
+					//System.out.println(line.substring(12));
+					for(File file: dir.listFiles()){
+						if(file.getAbsolutePath().endsWith("DS_Store")){
+							continue;
+						}
+						ImageView iv = UIUtil.initImageView(UIUtil.getImage(file), 0, 0);
+						iv.fitWidthProperty().bind(stage.widthProperty());
+						iv.fitHeightProperty().bind(stage.heightProperty());
+						map.put(getNum(file.getName()),iv);
+						//story.getPages().add(iv);
+						//System.out.println("here");
+					}
+					for(Integer key: map.keySet()){
+						story.getPages().add(map.get(key));
+					}
+					myMap.get(mapI).addStory(story);
+				}
+			}
+			scanner.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
-	static{
+	private void initBasic(){
 		myShards = new ArrayList<>();
 		myShards.add(UIUtil.initImageView("s_piece1_orange.png", 0, 0));
 		myShards.add(UIUtil.initImageView("s_piece1_red.png", 0, 0));
@@ -32,64 +135,15 @@ public class StoryLines {
 		myShards.add(UIUtil.initImageView("s_piece2_teal.png", 0, 0));
 		myShards.add(UIUtil.initImageView("s_piece3_pink.png", 0, 0));
 		myShards.add(UIUtil.initImageView("s_piece3_purple.png", 0, 0));
-	}
-
-	public StoryLines(String path, Stage stage){
 		this.myCurrentLevel = 1;
 		this.myMap = new HashMap<>();
 		this.myShardIndex = 0;
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(path));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		int mapI = 1;
-		String line = "";
-		try {
-			line = br.readLine();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			line = null;
-			e.printStackTrace();
-		}
-		while(line != null){
-			line = line.trim();
-			if(line.matches("\\d+")){
-				mapI = Integer.parseInt(line);
-				myMap.put(mapI, new Doors());
-				//System.out.println(mapI);
-			}
-			else if(!line.endsWith("DS_Store") && !line.equals("")){
-				File dir = new File(line);
-				Story story = new Story();
-				Map<Integer,ImageView> map = new TreeMap<>();
-				for(File file: dir.listFiles()){
-					if(file.getAbsolutePath().endsWith("DS_Store")){
-						continue;
-					}
-					ImageView iv = UIUtil.initImageView(UIUtil.getImage(file), 0, 0);
-					iv.fitWidthProperty().bind(stage.widthProperty());
-					iv.fitHeightProperty().bind(stage.heightProperty());
-					map.put(getNum(file.getName()),iv);
-					//story.getPages().add(iv);
-				}
-				for(Integer key: map.keySet()){
-					story.getPages().add(map.get(key));
-				}
-				myMap.get(mapI).addStory(story);
-			}
-			try {
-				line = br.readLine();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				line = null;
-				e.printStackTrace();
-			}
-		}
 	}
-	
+
+	private String combine(String pre, int mid, String suf){
+		return pre+mid+suf;
+	}
+
 	private int getNum(String string){
 		int start = -1;
 		int end = -1;
@@ -124,7 +178,7 @@ public class StoryLines {
 	public boolean isOver(){
 		return this.myCurrentLevel == Collections.max(myMap.keySet())+1;
 	}
-	
+
 	public ImageView getShard(){
 		ImageView result = this.myShards.get(this.myShardIndex);
 		this.myShardIndex++;
@@ -133,7 +187,7 @@ public class StoryLines {
 		}
 		return result;
 	}
-	
+
 	public ImageView getShard(int i){
 		return this.myShards.get(i);
 	}

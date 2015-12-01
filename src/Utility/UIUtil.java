@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class UIUtil {
 
@@ -83,6 +84,14 @@ public class UIUtil {
 		for(String path: paths){
 			result.add(UIUtil.initImageView(UIUtil.getImage(path), 0, 0));
 		}
+		return result;
+	}
+
+	public static ImageView initImageView(String name, double x, double y, Stage stage) {
+		// TODO Auto-generated method stub
+		ImageView result = initImageView(name,x,y);
+		result.fitWidthProperty().bind(stage.widthProperty());
+		result.fitHeightProperty().bind(stage.heightProperty());
 		return result;
 	}
 	

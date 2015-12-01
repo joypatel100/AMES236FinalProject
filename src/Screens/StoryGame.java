@@ -1,7 +1,4 @@
 package Screens;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
