@@ -31,7 +31,7 @@ public class StoryGame {
 		}
 		*/
 		WIDTH = 800;
-		HEIGHT = 800;
+		HEIGHT = 600;
 	}
 	
 	public Scene init(Stage stage){

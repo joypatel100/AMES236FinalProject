@@ -37,7 +37,7 @@ public class MapScreen extends AScreen{
 		List<ImageView> right = UIUtil.initIV(RIGHT);
 		List<ImageView> front = UIUtil.initIV(FRONT);
 		List<ImageView> back = UIUtil.initIV(BACK);
-		myCharacter = new GameCharacter(.45*((double) StoryGame.WIDTH),.8*((double) StoryGame.HEIGHT),5);
+		myCharacter = new GameCharacter(.2*((double) StoryGame.WIDTH),.75*((double) StoryGame.HEIGHT),5);
 		myCharacter.setLeft(left);
 		myCharacter.setRight(right);
 		myCharacter.setFront(front);
@@ -57,15 +57,19 @@ public class MapScreen extends AScreen{
 			this.myCharacter.update();
 			if(this.myCharacter.getX() < .1*((double) StoryGame.WIDTH)){
 				this.myCharacter.setX(.1*((double) StoryGame.WIDTH));
+				this.myCharacter.stop();
 			}
 			else if(this.myCharacter.getX() > .9*((double) StoryGame.WIDTH)){
 				this.myCharacter.setX(.9*((double) StoryGame.WIDTH));
+				this.myCharacter.stop();
 			}
 			if(this.myCharacter.getY() < .1*((double) StoryGame.HEIGHT)){
 				this.myCharacter.setY(.1*((double) StoryGame.HEIGHT));
+				this.myCharacter.stop();
 			}
 			else if(this.myCharacter.getY() > .9*((double) StoryGame.HEIGHT)){
 				this.myCharacter.setY(.9*((double) StoryGame.HEIGHT));
+				this.myCharacter.stop();
 			}
 			this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
 			doorCollision();

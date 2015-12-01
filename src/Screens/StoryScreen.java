@@ -75,11 +75,11 @@ public class StoryScreen extends AScreen{
 			this.myCurrent = this.myStory.previous();
 			updated = true;
 		}
-		if(updated){
-			myCharacter.removeCharacter(this.myStoryGame.getRoot());
-			this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
-		}
 		if(this.myCurrent != null){
+			if(updated){
+				myCharacter.removeCharacter(this.myStoryGame.getRoot());
+				this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
+			}
 			this.myStoryGame.getRoot().getChildren().add(i, myCurrent);
 		}
 	}
