@@ -38,7 +38,7 @@ public class StoryGame {
 		this.myStage = stage;
 		this.myRoot = new Group();
 		this.myScene = new Scene(myRoot,WIDTH,HEIGHT,Color.WHITE);
-		this.myScreen = new LoadingScreen(this);
+		this.myScreen = new MainMenuScreen(this);
 		this.myScene.setOnKeyPressed(e -> handleKeyPressed(e.getCode()));
 		this.myScene.setOnKeyReleased(e -> handleKeyReleased(e.getCode()));
 		return myScene;

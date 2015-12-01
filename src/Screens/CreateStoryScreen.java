@@ -18,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -36,6 +37,8 @@ public class CreateStoryScreen extends AScreen{
 		super(game);
 		// TODO Auto-generated constructor stub
 		this.myHBox = new HBox();
+		this.myHBox.setTranslateX(StoryGame.WIDTH/10);
+		this.myHBox.setTranslateY(StoryGame.HEIGHT/10);
 		this.myStoryGame.addToRoot(myHBox);
 		initNumLevelsComboBox();
 		initDone();
@@ -43,13 +46,13 @@ public class CreateStoryScreen extends AScreen{
 	}
 	
 	private void initDone(){
-		this.myDone = UIUtil.initButton("Done", StoryGame.WIDTH*.5, StoryGame.HEIGHT*.5);
+		this.myDone = UIUtil.initButton("Done", StoryGame.WIDTH*.8, StoryGame.HEIGHT*.8);
 		this.myDone.setOnAction(e -> handleDone());
 		this.myStoryGame.addToRoot(myDone);
 	}
 	
 	private void initBackToMenu(){
-		Button back = UIUtil.initButton("Main Menu", StoryGame.WIDTH*.5, StoryGame.HEIGHT*.6);
+		Button back = UIUtil.initButton("Main Menu", StoryGame.WIDTH*.8, StoryGame.HEIGHT*.9);
 		back.setOnAction(e -> {this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));});
 		this.myStoryGame.addToRoot(back);
 	}
@@ -87,8 +90,11 @@ public class CreateStoryScreen extends AScreen{
 		}
 		ObservableList<String> lvls = FXCollections.observableArrayList(nums);
 		myLevels = new ComboBox<>(lvls);
+		Text title = new Text("Number of \nLevels");
+		VBox vbox = new VBox();
+		vbox.getChildren().addAll(title,myLevels);
 		myLevels.setOnAction(e -> initListView());
-		this.myHBox.getChildren().add(myLevels);
+		this.myHBox.getChildren().add(vbox);
 	}
 
 	private void initListView(){
@@ -113,6 +119,7 @@ public class CreateStoryScreen extends AScreen{
 			this.myHBox.getChildren().remove(myText);
 		}
 		myText = new Text(text);
+		myText.setTranslateX(10);
 		this.myHBox.getChildren().add(myText);
 	}
 
@@ -122,12 +129,24 @@ public class CreateStoryScreen extends AScreen{
 			DirectoryChooser chooser = new DirectoryChooser();
 			chooser.setTitle("Choose files.");
 			File dir = chooser.showDialog(this.myStoryGame.getStage());
+			if(dir==null){
+				return;
+			}
 			this.myMap.put(level, "\n" + level);
 			for(File file: dir.listFiles()){
 				this.myMap.put(level, this.myMap.get(level) + "\n" + file.getAbsolutePath());
 			}
 		}
-		changeText(myMap.get(level));
+		String text = myMap.get(level);
+		if(text.indexOf("/")!=-1){
+			String[] spl = text.split("\n");
+			text = "";
+			for(String s: spl){
+				String[] sp = s.split("/");
+				text += sp[sp.length-1] + "\n";
+			}
+		}
+		changeText(text);
 	}
 
 	@Override
