@@ -25,7 +25,7 @@ public class MapScreen extends AScreen{
 
 	public MapScreen(StoryGame game, StoryLines sl){
 		super(game);
-		ImageView background = UIUtil.initImageView(UIUtil.getImage("background.png"), 0, 0);
+		ImageView background = UIUtil.initImageView(UIUtil.getImage("starry_sky.gif"), 0, 0);
 		background.fitWidthProperty().bind(this.myStoryGame.getStage().widthProperty());
 		background.fitHeightProperty().bind(this.myStoryGame.getStage().heightProperty());
 		this.myStoryGame.addToRoot(background);

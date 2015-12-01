@@ -28,6 +28,7 @@ public class StoryLines {
 		Story story = new Story();
 		for(int i = 1; i <= 10; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+			System.out.println(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
 		this.myMap.get(1).addStory(story);
 		pre = "Comic/Tier1/Jennifer-comic-first-tier/Panel ";
@@ -38,10 +39,10 @@ public class StoryLines {
 		this.myMap.get(1).addStory(story);
 
 		this.myMap.put(2, new Doors());
-		pre = "Comic/Tier2/Amy-comic-second-tier/Amy-pg";
+		pre = "Comic/Tier2/Amy-_GLB, YK_-Comic-Pages/BookScanCenter_";
 		suf = ".png";
 		story = new Story();
-		for(int i = 1; i <= 8; i++){
+		for(int i = 1; i <= 3; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
 		this.myMap.get(2).addStory(story);
@@ -51,7 +52,7 @@ public class StoryLines {
 		for(int i = 1; i <=9 ; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre+"0",i,suf),0,0,stage));
 		}
-		for(int i = 10; i <=17; i++){
+		for(int i = 10; i < 18; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
 		this.myMap.get(2).addStory(story);
@@ -64,11 +65,12 @@ public class StoryLines {
 		this.myMap.get(2).addStory(story);
 
 		this.myMap.put(3, new Doors());
-		pre = "Comic/Tier3/Amy-_GLB, YK_-Comic-Pages/BookScanCenter_";
+		pre = "Comic/Tier3/Amy-comic-pg/Amy-pg";
 		suf = ".png";
 		story = new Story();
-		for(int i = 1; i <= 3; i++){
+		for(int i = 1; i <= 8; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
+			//System.out.println(combine(pre,i,suf));
 		}
 		this.myMap.get(3).addStory(story);
 		pre = "Comic/Tier3/Sam-comic-pages/Sam-pg";

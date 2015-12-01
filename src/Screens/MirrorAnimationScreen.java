@@ -23,7 +23,7 @@ public class MirrorAnimationScreen extends AScreen {
 	
 	public MirrorAnimationScreen(StoryGame game, StoryLines sl) {
 		super(game);
-		ImageView background = UIUtil.initImageView(UIUtil.getImage("question.png"), 0, 0);
+		ImageView background = UIUtil.initImageView(UIUtil.getImage("galaxy.png"), 0, 0);
 		background.fitWidthProperty().bind(this.myStoryGame.getStage().widthProperty());
 		background.fitHeightProperty().bind(this.myStoryGame.getStage().heightProperty());
 		this.myStoryGame.addToRoot(background);
@@ -33,11 +33,11 @@ public class MirrorAnimationScreen extends AScreen {
 		myMirror = UIUtil.initImageView(image,centerX,centerY);
 		emptyMirror = UIUtil.initImageView(UIUtil.getImage("mirror_empty.png"), 
 				centerX,centerY);
-		mirrorP1_o = UIUtil.initImageView(UIUtil.getImage("piece1_orange.png"), 
+		mirrorP1_o = UIUtil.initImageView(UIUtil.getImage("piece1_plain.png"), 
 				centerX, centerY);
-		mirrorP2_b = UIUtil.initImageView(UIUtil.getImage("piece2_blue.png"), 
+		mirrorP2_b = UIUtil.initImageView(UIUtil.getImage("piece2_plain.png"), 
 				centerX, centerY);
-		mirrorP3_p = UIUtil.initImageView(UIUtil.getImage("piece3_purple.png"), 
+		mirrorP3_p = UIUtil.initImageView(UIUtil.getImage("piece3_plain.png"), 
 				centerX, centerY);
 		finished = false;
 		this.myStoryLine = sl;
