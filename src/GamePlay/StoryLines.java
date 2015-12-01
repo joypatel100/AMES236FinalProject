@@ -19,23 +19,25 @@ public class StoryLines {
 	private int myCurrentLevel;
 	private List<ImageView> myShards;
 	private int myShardIndex;
-
+	
 	public StoryLines(Stage stage){
 		initBasic();
 		String pre = "Comic/Tier1/Christine-comic-first-tier/Panel ";
 		String suf = ".jpg";
+		ImageView endPage = new ImageView();
 		this.myMap.put(1, new Doors());
 		Story story = new Story();
 		for(int i = 1; i <= 10; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
-			System.out.println(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(1).addStory(story);
 		pre = "Comic/Tier1/Jennifer-comic-first-tier/Panel ";
 		story = new Story();
 		for(int i = 1; i <= 19; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(1).addStory(story);
 
 		this.myMap.put(2, new Doors());
@@ -45,6 +47,7 @@ public class StoryLines {
 		for(int i = 1; i <= 3; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(2).addStory(story);
 		pre = "Comic/Tier2/Jennifer-comic-second-tier/Jennifer-panel";
 		suf = ".png";
@@ -55,6 +58,7 @@ public class StoryLines {
 		for(int i = 10; i < 18; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(2).addStory(story);
 		pre = "Comic/Tier2/Yuxuan-comic-pages/BookScanCenter_";
 		suf = ".png";
@@ -62,6 +66,7 @@ public class StoryLines {
 		for(int i = 1; i <= 3; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(2).addStory(story);
 
 		this.myMap.put(3, new Doors());
@@ -70,8 +75,8 @@ public class StoryLines {
 		story = new Story();
 		for(int i = 1; i <= 8; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
-			//System.out.println(combine(pre,i,suf));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(3).addStory(story);
 		pre = "Comic/Tier3/Sam-comic-pages/Sam-pg";
 		suf = ".png";
@@ -82,6 +87,7 @@ public class StoryLines {
 		for(int i = 10; i <= 11; i++){
 			story.getPages().add(UIUtil.initImageView(combine(pre,i,suf),0,0,stage));
 		}
+		story.getPages().add(endPage);
 		this.myMap.get(3).addStory(story);
 
 

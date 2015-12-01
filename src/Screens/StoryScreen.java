@@ -47,7 +47,7 @@ public class StoryScreen extends AScreen{
 		boolean updated = false;
 		if(this.myCharacter.getX() > .9*((double) StoryGame.WIDTH) && this.myCharacter.getState()==State.RIGHT){
 			this.myCurrent = this.myStory.next();
-			if(this.myStory.atEnd()){
+			if(this.myStory.atEnd() && this.myCharacter.getX() > .9*((double) StoryGame.WIDTH)){
 				this.myStoryLines.next();
 				if(this.myStoryLines.isOver()){
 					this.myStoryGame.setScreen(new MirrorReconstructionScreen(this.myStoryGame));
