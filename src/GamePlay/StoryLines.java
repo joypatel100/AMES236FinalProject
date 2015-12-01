@@ -99,10 +99,11 @@ public class StoryLines {
 	public StoryLines(File path, Stage stage){
 		initBasic();
 		int mapI = 1;
-		try(Scanner scanner = new Scanner(this.getClass().getClassLoader().getResourceAsStream(path.getName()))){
+		try(Scanner scanner = new Scanner(path)){
 			while(scanner.hasNextLine()){
 				String line = scanner.nextLine();
 				line = line.trim();
+				System.out.println(line);
 				if(line.matches("\\d+")){
 					mapI = Integer.parseInt(line);
 					myMap.put(mapI, new Doors());
@@ -111,6 +112,7 @@ public class StoryLines {
 				else if(!line.endsWith("DS_Store") && !line.equals("")){
 					File dir = new File(line);
 					Story story = new Story();
+					System.out.print(line);
 					Map<Integer,ImageView> map = new TreeMap<>();
 					//System.out.println(line.substring(12));
 					for(File file: dir.listFiles()){

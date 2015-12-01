@@ -69,7 +69,7 @@ public class MirrorReconstructionScreen extends MirrorAnimationScreen{
 
 		Text complete = new Text("Press Enter");
 		complete.setTranslateX(StoryGame.WIDTH/2);
-		complete.setTranslateY(StoryGame.HEIGHT/10);
+		complete.setTranslateY(StoryGame.HEIGHT/2);
 		this.myStoryGame.addToRoot(complete);
 	}
 
