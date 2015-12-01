@@ -8,7 +8,6 @@ import java.util.Map;
 import Utility.UIUtil;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 public class Doors {
 	
@@ -27,14 +26,15 @@ public class Doors {
 		return this.myStories;
 	}
 	
-	public List<ImageView> constructDoors(Image doorImg, double width, double height){
+	public List<ImageView> constructDoors(double width, double height, StoryLines storylines){
 		myMap = new HashMap<>();
+		Image doorImg = storylines.getShard(0).getImage();
 		List<ImageView> doors = new ArrayList<>();
 		for(int i = 0; i < myStories.size(); i++){
 			int j = i - myStories.size()/2;
 			double x = width/2 - doorImg.getWidth()*j - 30*j;
-			double y = height*.25;
-			ImageView iv = UIUtil.initImageView(doorImg, x, y);
+			double y = height*.55;
+			ImageView iv = UIUtil.initImageView(storylines.getShard().getImage(), x, y);
 			doors.add(iv);
 			this.myMap.put(iv, myStories.get(i));
 		}

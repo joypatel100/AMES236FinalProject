@@ -122,7 +122,7 @@ public class CreateStoryScreen extends AScreen{
 			DirectoryChooser chooser = new DirectoryChooser();
 			chooser.setTitle("Choose files.");
 			File dir = chooser.showDialog(this.myStoryGame.getStage());
-			this.myMap.put(level, level);
+			this.myMap.put(level, "\n" + level);
 			for(File file: dir.listFiles()){
 				this.myMap.put(level, this.myMap.get(level) + "\n" + file.getAbsolutePath());
 			}

@@ -45,6 +45,10 @@ public class UIUtil {
 		return result;
 	}
 	
+	public static ImageView initImageView(String imageName, double x,double y){
+		return initImageView(getImage(imageName),x,y);
+	}
+	
 	// Initialize Buttons
 	public static Button initButton(String name, Image image, double x, double y){
 		Button result = (image!=null) ? new Button(name,new ImageView(image)) : new Button(name);

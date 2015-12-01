@@ -1,6 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +25,11 @@ public class MapScreen extends AScreen{
 
 	public MapScreen(StoryGame game, StoryLines sl){
 		super(game);
+		ImageView background = UIUtil.initImageView(UIUtil.getImage("background.png"), 0, 0);
+		background.fitWidthProperty().bind(this.myStoryGame.getStage().widthProperty());
+		background.fitHeightProperty().bind(this.myStoryGame.getStage().heightProperty());
+		this.myStoryGame.addToRoot(background);
+		
 		this.myStoryLines = sl;
 		this.myDoors = this.myStoryLines.getCurrentDoors();
 
@@ -33,15 +37,15 @@ public class MapScreen extends AScreen{
 		List<ImageView> right = UIUtil.initIV(RIGHT);
 		List<ImageView> front = UIUtil.initIV(FRONT);
 		List<ImageView> back = UIUtil.initIV(BACK);
-		myCharacter = new GameCharacter(StoryGame.WIDTH/2,StoryGame.HEIGHT/2,5);
+		myCharacter = new GameCharacter(.45*((double) StoryGame.WIDTH),.8*((double) StoryGame.HEIGHT),5);
 		myCharacter.setLeft(left);
 		myCharacter.setRight(right);
 		myCharacter.setFront(front);
 		myCharacter.setBack(back);
 		this.myCharacter.init();
 		this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
-		this.myDoors.constructDoors(UIUtil.getImage("Back Stationary.png"), 
-				StoryGame.WIDTH, StoryGame.HEIGHT).stream().forEach(img -> {this.myStoryGame.addToRoot(img);});
+		this.myDoors.constructDoors(StoryGame.WIDTH, StoryGame.HEIGHT, 
+				myStoryLines).stream().forEach(img -> {this.myStoryGame.addToRoot(img);});
 
 	}
 
@@ -51,6 +55,18 @@ public class MapScreen extends AScreen{
 		if(this.myCharacter != null){
 			myCharacter.removeCharacter(this.myStoryGame.getRoot());
 			this.myCharacter.update();
+			if(this.myCharacter.getX() < .1*((double) StoryGame.WIDTH)){
+				this.myCharacter.setX(.1*((double) StoryGame.WIDTH));
+			}
+			else if(this.myCharacter.getX() > .9*((double) StoryGame.WIDTH)){
+				this.myCharacter.setX(.9*((double) StoryGame.WIDTH));
+			}
+			if(this.myCharacter.getY() < .1*((double) StoryGame.HEIGHT)){
+				this.myCharacter.setY(.1*((double) StoryGame.HEIGHT));
+			}
+			else if(this.myCharacter.getY() > .9*((double) StoryGame.HEIGHT)){
+				this.myCharacter.setY(.9*((double) StoryGame.HEIGHT));
+			}
 			this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
 			doorCollision();
 		}

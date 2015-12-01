@@ -1,4 +1,0 @@
-1
-./resources/Level1/Sam-comic-pages
-./resources/Level1/Sam-comic-pages copy
-./resources/Level1/Sam-comic-pages copy 2

@@ -203,10 +203,12 @@ public class GameCharacter {
 	
 	public void setX(double x){
 		this.myX = x;
+		this.myCurrent.setX(myX);
 	}
 	
 	public void setY(double y){
 		this.myY = y;
+		this.myCurrent.setY(myY);
 	}
 	
 	public void initLeft(){

@@ -28,7 +28,7 @@ public class StoryScreen extends AScreen{
 		List<ImageView> left = UIUtil.initIV(MapScreen.LEFT);
 		List<ImageView> right = UIUtil.initIV(MapScreen.RIGHT);
 		myCharacter = new GameCharacter(.1*((double) StoryGame.WIDTH),
-				.75*((double) StoryGame.HEIGHT),10);
+				.75*((double) StoryGame.HEIGHT),7);
 		myCharacter.setLeft(left);
 		myCharacter.setRight(right);
 		myCharacter.setBack(new ArrayList<>());
@@ -44,6 +44,7 @@ public class StoryScreen extends AScreen{
 		this.myCharacter.update();
 		this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
 		int i = this.myStoryGame.removeFromRoot(myCurrent);
+		boolean updated = false;
 		if(this.myCharacter.getX() > .9*((double) StoryGame.WIDTH) && this.myCharacter.getState()==State.RIGHT){
 			this.myCurrent = this.myStory.next();
 			if(this.myStory.atEnd()){
@@ -57,19 +58,26 @@ public class StoryScreen extends AScreen{
 				this.myCurrent = null;
 			}
 			else{
-				this.myCharacter.setX(.11*((double) StoryGame.WIDTH));
+				this.myCharacter.setX(.1*((double) StoryGame.WIDTH));
 				this.myCharacter.initRight();
 			}
+			updated = true;
 		}
-		else if(this.myCharacter.getX() < .1*((double) StoryGame.WIDTH) && this.myCharacter.getState()==State.LEFT ){
-			this.myCurrent = this.myStory.previous();
+		else if(this.myCharacter.getX() < .1*((double) StoryGame.WIDTH)){
 			if(this.myStory.isBeginning()){
 				this.myCharacter.stop();
+				this.myCharacter.setX(.1*((double) StoryGame.WIDTH));
 			}
-			else{
-				this.myCharacter.setX(.89*((double) StoryGame.WIDTH));
+			else if(this.myCharacter.getState()==State.LEFT){
+				this.myCharacter.setX(.9*((double) StoryGame.WIDTH));
 				this.myCharacter.initLeft();
 			}
+			this.myCurrent = this.myStory.previous();
+			updated = true;
+		}
+		if(updated){
+			myCharacter.removeCharacter(this.myStoryGame.getRoot());
+			this.myStoryGame.addToRoot(this.myCharacter.getCurrentImage());
 		}
 		if(this.myCurrent != null){
 			this.myStoryGame.getRoot().getChildren().add(i, myCurrent);
@@ -81,17 +89,10 @@ public class StoryScreen extends AScreen{
 		// TODO Auto-generated method stub
 		switch(code){
 		case RIGHT:
-			//this.myStoryGame.removeFromRoot(myCurrent);
-			//this.myCurrent = myStory.next();
-			//this.myStoryGame.addToRoot(myCurrent);
 			this.myCharacter.stop();
-			System.out.println(this.myCharacter.getX());
 			break;
 		case LEFT:
 			this.myCharacter.stop();
-			//this.myStoryGame.removeFromRoot(myCurrent);
-			//this.myCurrent = myStory.previous();
-			//this.myStoryGame.addToRoot(myCurrent);
 			break;
 		case Q:
 			this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));

@@ -19,7 +19,7 @@ public class StoryGame {
 	public static final int WIDTH;
 	public static final int HEIGHT;
 	static{
-		int width, height;
+		/*int width, height;
 		try{
 			Dimension sz = Toolkit.getDefaultToolkit().getScreenSize();
 			width = (int) sz.getWidth();
@@ -29,8 +29,9 @@ public class StoryGame {
 			width = 800;
 			height = 800;
 		}
-		WIDTH = width;
-		HEIGHT = height;
+		*/
+		WIDTH = 800;
+		HEIGHT = 800;
 	}
 	
 	public Scene init(Stage stage){
