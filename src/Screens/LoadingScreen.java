@@ -42,7 +42,7 @@ public class LoadingScreen extends AScreen{
 				this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));
 			}
 			if(sl!=null){
-				this.myStoryGame.setScreen(new MapScreen(this.myStoryGame, sl));
+				this.myStoryGame.setScreen(new MirrorAnimationScreen(this.myStoryGame,sl));
 			}
 		}
 	}

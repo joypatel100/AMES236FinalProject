@@ -39,6 +39,8 @@ public class StoryGame {
 		this.myRoot = new Group();
 		this.myScene = new Scene(myRoot,WIDTH,HEIGHT,Color.WHITE);
 		this.myScreen = new MainMenuScreen(this);
+		//this.myScreen = new MirrorReconstructionScreen(this);
+		
 		this.myScene.setOnKeyPressed(e -> handleKeyPressed(e.getCode()));
 		this.myScene.setOnKeyReleased(e -> handleKeyReleased(e.getCode()));
 		return myScene;

@@ -50,7 +50,7 @@ public class StoryScreen extends AScreen{
 			if(this.myStory.atEnd()){
 				this.myStoryLines.next();
 				if(this.myStoryLines.isOver()){
-					this.myStoryGame.setScreen(new MainMenuScreen(this.myStoryGame));
+					this.myStoryGame.setScreen(new MirrorReconstructionScreen(this.myStoryGame));
 				}
 				else{
 					this.myStoryGame.setScreen(new MapScreen(this.myStoryGame,myStoryLines));
