@@ -17,7 +17,7 @@ public class GameApplication extends Application{
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
 		StoryGame game = new StoryGame();
-		stage.setTitle("Interactive Game");
+		stage.setTitle("Interactive Story");
 		Scene scene = game.init(stage);
 		stage.setScene(scene);
 		stage.show();
