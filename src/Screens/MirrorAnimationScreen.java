@@ -16,16 +16,16 @@ public class MirrorAnimationScreen extends AScreen {
 	private PathTransition myAnimation;
 	public MirrorAnimationScreen(StoryGame game) {
 		super(game);
-		ImageView mirror = UIUtil.initImageView(UIUtil.getImage("/Mirror/mirror_orig.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
+		ImageView mirror = UIUtil.initImageView(UIUtil.getImage("mirror_orig.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
 		this.myStoryGame.addToRoot(mirror);
 		// TODO Auto-generated constructor stub
 	}
 	
 	private void startAnimation(){
-		ImageView emptyMirror = UIUtil.initImageView(UIUtil.getImage("/Mirror/mirror_empty.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
-		ImageView mirrorP1_o = UIUtil.initImageView(UIUtil.getImage("/Mirror/piece1_orange.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
-		ImageView mirrorP2_b = UIUtil.initImageView(UIUtil.getImage("/Mirror/piece2_blue.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
-		ImageView mirrorP3_p = UIUtil.initImageView(UIUtil.getImage("/Mirror/piece3_purple.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
+		ImageView emptyMirror = UIUtil.initImageView(UIUtil.getImage("mirror_empty.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
+		ImageView mirrorP1_o = UIUtil.initImageView(UIUtil.getImage("piece1_orange.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
+		ImageView mirrorP2_b = UIUtil.initImageView(UIUtil.getImage("piece2_blue.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
+		ImageView mirrorP3_p = UIUtil.initImageView(UIUtil.getImage("piece3_purple.png"), StoryGame.WIDTH/2, StoryGame.HEIGHT/2);
 		
 		this.myStoryGame.addToRoot(emptyMirror);
 		this.myStoryGame.addToRoot(mirrorP1_o);
